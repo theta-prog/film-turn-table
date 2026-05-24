@@ -215,7 +215,7 @@ function StreetMode({ phrase }: { phrase: string }) {
                       display: 'inline-block',
                       fontFamily: '"Noto Sans JP", sans-serif',
                       fontWeight: 900,
-                      fontSize: 'clamp(15px, 4.5vw, 52px)',
+                      fontSize: 'clamp(15px, 3vw, 36px)',
                       color: '#ffffff',
                       lineHeight: 1.25,
                       letterSpacing: '0.08em',

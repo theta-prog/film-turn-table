@@ -33,18 +33,23 @@ export default function TokenSetup({ onStart }: Props) {
   const canStart = token.trim() !== '' && selectedUrl.trim() !== ''
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-film-dark p-6">
-      <div className="w-full max-w-md">
+    <div className="h-full min-h-0 overflow-y-auto flex items-center justify-center p-4 sm:p-6">
+      <div className="w-full max-w-lg rounded-xl border border-white/[0.08] bg-[linear-gradient(180deg,rgba(22,21,20,0.96),rgba(10,9,9,0.97))] p-6 sm:p-8 shadow-[0_24px_80px_rgba(0,0,0,0.55)]">
         {/* ロゴ */}
         <div className="text-center mb-10">
-          <div className="inline-block border-2 border-white/20 px-6 py-3 mb-4 relative overflow-hidden">
+          <div className="inline-flex items-center gap-2 rounded-sm border border-white/10 bg-black/30 px-4 py-1.5 mb-4 text-[10px] tracking-[0.35em] text-white/40">
+            <span>FILM DOOR</span>
+            <span className="text-white/20">•</span>
+            <span>READY</span>
+          </div>
+          <div className="inline-block border border-white/[0.09] px-6 py-4 mb-4 relative overflow-hidden rounded-lg bg-black/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
             <div className="absolute left-0 top-0 bottom-0 w-5 film-sprocket bg-black/60" />
             <div className="absolute right-0 top-0 bottom-0 w-5 film-sprocket bg-black/60" />
             <h1 className="font-special text-4xl text-film-yellow tracking-widest mx-5">
               FilmBeat
             </h1>
           </div>
-          <p className="text-white/50 text-sm">リリックカメラ for Magical Mirai</p>
+          <p className="text-white/55 text-sm tracking-[0.16em] uppercase">リリックカメラ for Magical Mirai</p>
         </div>
 
         <div className="space-y-5">
@@ -83,8 +88,8 @@ export default function TokenSetup({ onStart }: Props) {
             <select
               value={presetIndex}
               onChange={e => setPresetIndex(Number(e.target.value))}
-              className="w-full bg-white/5 border border-white/10 rounded px-3 py-2.5
-                         text-sm text-white outline-none focus:border-film-yellow/50
+              className="w-full bg-black/30 border border-white/[0.09] rounded px-3 py-3
+                         text-sm text-white outline-none focus:border-white/30
                          transition-colors appearance-none cursor-pointer"
             >
               {PRESET_SONGS.map((s, i) => (
@@ -111,10 +116,10 @@ export default function TokenSetup({ onStart }: Props) {
             onClick={() =>
               onStart({ token: token.trim(), songUrl: selectedUrl.trim() })
             }
-            className="w-full py-3 rounded font-bold tracking-widest text-sm uppercase
+            className="w-full py-3.5 rounded font-bold tracking-[0.28em] text-sm uppercase
                        transition-all disabled:opacity-30 disabled:cursor-not-allowed
                        enabled:bg-film-yellow enabled:text-black
-                       enabled:hover:bg-yellow-200 enabled:active:scale-95"
+                       enabled:hover:brightness-110 enabled:active:scale-[0.98]"
           >
             Start FilmBeat
           </button>

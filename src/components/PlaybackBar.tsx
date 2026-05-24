@@ -48,7 +48,7 @@ export default function PlaybackBar({
   const recClock = `${Math.floor(recSeconds / 60)}:${String(recSeconds % 60).padStart(2, '0')}`
 
   return (
-    <div className="flex flex-col gap-2 px-4 py-3 bg-black/60 backdrop-blur-sm">
+    <div className="flex flex-col gap-2 px-4 py-3 bg-black/20 border-t border-white/[0.05]">
       {/* Song info + photo count */}
       <div className="flex items-center justify-between text-xs text-white/40 px-1">
         <span className="truncate max-w-[60%]">
@@ -99,11 +99,11 @@ export default function PlaybackBar({
         <button
           onClick={onToggleShutterMode}
           className={`
-            px-3 py-1.5 rounded-full text-xs font-bold tracking-wide
-            transition-all active:scale-95
+            px-3 py-1 text-[11px] font-bold tracking-[0.16em] border
+            transition-colors duration-150 active:opacity-60
             ${shutterMode === 'auto'
-              ? 'bg-film-yellow/80 text-black'
-              : 'bg-white/10 text-white/60 hover:bg-white/20'}
+              ? 'border-film-yellow/50 text-film-yellow bg-film-yellow/8'
+              : 'border-white/14 text-white/48 hover:border-white/28 hover:text-white/72'}
           `}
         >
           {shutterMode === 'auto' ? 'AUTO' : 'MANUAL'}
@@ -113,14 +113,14 @@ export default function PlaybackBar({
           onClick={onToggleRecording}
           disabled={!isLoaded}
           className={`
-            px-3 py-1.5 rounded-full text-xs font-bold tracking-wide
-            transition-all active:scale-95 disabled:opacity-30
+            px-3 py-1 text-[11px] font-bold tracking-[0.16em] border
+            transition-colors duration-150 active:opacity-60 disabled:opacity-30
             ${isRecording
-              ? 'bg-red-600 text-white hover:bg-red-500'
-              : 'bg-white/10 text-white/60 hover:bg-white/20'}
+              ? 'border-red-500/50 text-red-400 bg-red-900/15'
+              : 'border-white/14 text-white/48 hover:border-white/28 hover:text-white/72'}
           `}
         >
-          {isRecording ? `REC ${recClock}` : 'REC'}
+          {isRecording ? `● ${recClock}` : 'REC'}
         </button>
 
         {/* Spacer */}
