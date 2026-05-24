@@ -1,0 +1,153 @@
+@import '@stella-ds/theme/css';
+@import '@stella-ds/react/css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #0d0d0d;
+  color: #ffffff;
+  font-family: 'Noto Sans JP', sans-serif;
+  overflow: hidden;
+  height: 100dvh;
+  user-select: none;
+}
+
+#root {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Film frame sprocket holes ─── */
+.film-sprocket {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 6px,
+    #0d0d0d 6px,
+    #0d0d0d 16px,
+    transparent 16px,
+    transparent 22px
+  );
+  background-size: 100% 22px;
+}
+
+/* ─── Vignette overlay ─── */
+.vignette::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  pointer-events: none;
+}
+
+/* ─── Film grain overlay ─── */
+.film-grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+/* ─── Record groove pattern ─── */
+.record-bg {
+  background: repeating-radial-gradient(
+    circle at 50% 50%,
+    #1c1c1c 0px,
+    #1c1c1c 1px,
+    #222 1px,
+    #222 3px
+  );
+}
+
+/* ─── Film roll animation keyframes ─── */
+
+/* Sprocket holes (left/right strips): 22px = background-size repeat height */
+@keyframes filmSprocketScroll {
+  to { background-position-y: 22px; }
+}
+
+/* Film cell separators (center overlay): 80px = cell pitch */
+@keyframes filmCellScroll {
+  to { background-position-y: 80px; }
+}
+
+/* ─── CRT / ブラウン管ノイズ (vintage) ─── */
+
+/* ランダムグレイン：背景座標をコマ送りでずらして「砂嵐」感 */
+@keyframes crtGrain {
+  0%   { background-position:   0%    0%; }
+  10%  { background-position:  22%  -14%; }
+  20%  { background-position:  -6%   31%; }
+  30%  { background-position:  43%    7%; }
+  40%  { background-position: -21%   52%; }
+  50%  { background-position:  11%  -22%; }
+  60%  { background-position: -33%   18%; }
+  70%  { background-position:  27%   43%; }
+  80%  { background-position: -12%  -31%; }
+  90%  { background-position:  38%   21%; }
+  100% { background-position:   0%    0%; }
+}
+
+/* 不定期フリッカー：ブラウン管の輝度揺らぎ */
+@keyframes crtFlicker {
+  0%,  18%, 22%, 25%, 55%, 57%, 100% { opacity: 0; }
+  19%, 24%, 56%                       { opacity: 0.04; }
+}
+
+/* ローリングバー：走査線の帯が上から下へ流れる */
+@keyframes crtRoll {
+  from { top: -4px; }
+  to   { top: 100%; }
+}
+
+/* ─── Shutter flash ─── */
+.shutter-overlay {
+  position: fixed;
+  inset: 0;
+  background: white;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* ─── Scrollbar hide ─── */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─── Custom range slider ─── */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: #f0e0a0;
+  border-radius: 50%;
+  margin-top: -5.5px;
+  cursor: pointer;
+}
