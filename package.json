@@ -11,7 +11,7 @@
   "dependencies": {
     "@stella-ds/react": "^0.8.0",
     "@stella-ds/theme": "^0.8.0",
-    "framer-motion": "^11.3.0",
+    "framer-motion": "^14.5.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "textalive-app-api": "^0.4.0"
